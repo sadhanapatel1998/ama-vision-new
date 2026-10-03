@@ -1,0 +1,8 @@
+DirectoryIndex index.php
+ErrorDocument 404 /index.php
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
