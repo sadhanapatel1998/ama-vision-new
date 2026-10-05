@@ -7,7 +7,7 @@ $heroTitle='About AMA Vision'; $heroSub='One partner. One workflow. One accounta
     <p class="lead">AMA Vision is an integrated creative production company based in Delhi-NCR with Pan-India execution capability.</p>
     <p class="muted" style="margin-top:20px">We work across visual storytelling, event production, branded content, digital media and end-to-end production. With more than four years of production experience, the team has worked across government and public-sector environments, energy and infrastructure, corporate events, branded experiences, fashion and lifestyle, hospitality, retail, education, real estate, FMCG, technology and entertainment.</p>
   </div>
-  <div class="photo reveal reveal-delay-1" style="background-image:url('<?= img($IMG['crowd'],1000) ?>')"></div>
+  <div class="photo reveal reveal-delay-1" style="background-image:url('assets/img/about-img.jpg')"></div>
 </div></section>
 
 <section class="section" style="padding-top:0"><div class="wrap">
@@ -22,7 +22,6 @@ $heroTitle='About AMA Vision'; $heroSub='One partner. One workflow. One accounta
 <section class="section"><div class="wrap">
   <div class="eyebrow reveal">Founder</div>
   <div class="founder-grid">
-    <div class="founder-portrait reveal reveal-delay-1" style="background:url('<?= img($IMG['cam3'],900) ?>') center/cover"></div>
     <div class="reveal reveal-delay-2">
       <h2 class="founder-name">AMAN SINGH</h2>
       <div class="founder-title">Founder &amp; Creative Director</div>

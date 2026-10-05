@@ -181,7 +181,7 @@ include 'includes/header.php';
   <div class="wrap">
     <div class="eyebrow reveal">Founder's note</div>
     <div class="founder-grid">
-      <div class="founder-portrait reveal reveal-delay-1" style="background:url('<?= img($IMG['cam3'], 900) ?>') center/cover"></div>
+      <!-- <div class="founder-portrait reveal reveal-delay-1" style="background:url('<?= img($IMG['cam3'], 900) ?>') center/cover"></div> -->
       <div class="reveal reveal-delay-2">
         <h2 class="founder-name">AMAN SINGH</h2>
         <div class="founder-title">Founder &amp; Creative Director</div>

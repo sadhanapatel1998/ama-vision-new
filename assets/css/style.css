@@ -1250,7 +1250,7 @@ nav.main-nav a:hover::after {
 
 /* ---------- founder ---------- */
 .founder-grid {
-  display: grid;
+  display: block;
   grid-template-columns: .8fr 1.2fr;
   gap: 70px;
   align-items: center;
@@ -1300,7 +1300,7 @@ nav.main-nav a:hover::after {
 .founder-bio p {
   color: var(--gray);
   margin-bottom: 18px;
-  max-width: 520px;
+  /* max-width: 520px; */
   font-size: 15px;
 }
 
@@ -2220,4 +2220,10 @@ footer {
 
   }
 
+}
+#work .filters {
+  display:none;
+}
+.work-section .filters {
+  display:none;
 }

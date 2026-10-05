@@ -23,6 +23,8 @@ $IMG = [
   'cam2' => 'photo-1492691527719-9d1e07e534b4', 'party' => 'photo-1533174072545-7a4b6ad7a6c3',
   'concert' => 'photo-1501281668745-f7f57925c3b4', 'conf3' => 'photo-1515187029135-18ee286d815b',
   'lights' => 'photo-1470229722913-7c0e2dbbafd3', 'cam3' => 'photo-1492691527719-9d1e07e534b4',
+
+  
 ];
 $SERVICES = [
  'event-production' => ['Event Production & Execution','stage','Execution-led event production — from brief and run of show to stage, AV and the content the event generates.',

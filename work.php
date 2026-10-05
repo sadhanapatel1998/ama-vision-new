@@ -6,7 +6,7 @@ $heroSub = 'Selected productions across government, energy, corporate and experi
 $heroImg = 'concert';
 include 'includes/page-hero.php'; 
 ?>
-<section class="section">
+<section class="section work-section">
     <div class="wrap">
         <div class="eyebrow reveal">Selected work</div>
         <h2 class="h2 reveal">From concept<br><span class="muted">to delivery.</span></h2>
