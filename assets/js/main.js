@@ -407,3 +407,217 @@ document.addEventListener("click", () =>
     .querySelectorAll(".has-dd.open")
     .forEach((x) => x.classList.remove("open")),
 );
+
+
+
+
+
+/* =========================================================
+   CLIENT & BRAND PORTFOLIO MARQUEE
+   LOGOS: 1.png TO 56.png
+========================================================= */
+
+(function () {
+
+  "use strict";
+
+
+  /* =======================================================
+     CONFIGURATION
+  ======================================================= */
+
+  const avClientLogoPath = "assets/img/brand-logo/";
+
+  const avClientTotalLogos = 56;
+
+
+  /* =======================================================
+     CREATE LOGO ARRAY
+
+     Result:
+
+     [
+       "1.png",
+       "2.png",
+       "3.png",
+       ...
+       "56.png"
+     ]
+  ======================================================= */
+
+  const avClientLogos = Array.from(
+    { length: avClientTotalLogos },
+    function (_, index) {
+
+      return (index + 1) + ".png";
+
+    }
+  );
+
+
+  /* =======================================================
+     CREATE SINGLE LOGO CARD
+  ======================================================= */
+
+  function createAvClientLogoCard(fileName) {
+
+    const card = document.createElement("div");
+
+    card.className = "av-client-logo-card";
+
+
+    const image = document.createElement("img");
+
+    image.src = avClientLogoPath + fileName;
+
+    image.alt = "Client Brand";
+
+    image.draggable = false;
+
+
+    card.appendChild(image);
+
+
+    return card;
+
+  }
+
+
+  /* =======================================================
+     POPULATE MARQUEE
+
+     We create:
+
+     ORIGINAL SET
+     +
+     DUPLICATE SET
+
+     This allows the CSS animation to
+     continuously loop.
+  ======================================================= */
+
+  function populateAvClientMarquee(
+    containerId,
+    logos
+  ) {
+
+    const container =
+      document.getElementById(containerId);
+
+
+    if (!container) {
+
+      console.warn(
+        "Client marquee container not found:",
+        containerId
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Clear existing content
+    */
+
+    container.innerHTML = "";
+
+
+    /*
+      First complete set
+    */
+
+    logos.forEach(function (logo) {
+
+      container.appendChild(
+        createAvClientLogoCard(logo)
+      );
+
+    });
+
+
+    /*
+      Second complete set
+
+      Required for seamless animation
+    */
+
+    logos.forEach(function (logo) {
+
+      const card =
+        createAvClientLogoCard(logo);
+
+      /*
+        Mark duplicate cards
+      */
+
+      card.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      container.appendChild(card);
+
+    });
+
+  }
+
+
+  /* =======================================================
+     INITIALIZE
+  ======================================================= */
+
+  function initAvClientMarquee() {
+
+
+    /*
+      ROW 1
+
+      1 → 56
+
+      Moves LEFT
+    */
+
+    populateAvClientMarquee(
+      "avClientRow1",
+      avClientLogos
+    );
+
+
+    /*
+      ROW 2
+
+      56 → 1
+
+      Moves RIGHT
+    */
+
+    populateAvClientMarquee(
+      "avClientRow2",
+      [...avClientLogos].reverse()
+    );
+
+  }
+
+
+  /* =======================================================
+     DOM READY
+  ======================================================= */
+
+  if (
+    document.readyState === "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initAvClientMarquee
+    );
+
+  } else {
+
+    initAvClientMarquee();
+
+  }
+
+})();

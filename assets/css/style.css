@@ -1822,3 +1822,402 @@ footer {
   position: relative;
   z-index: 2;
 }
+
+/* =========================================================
+   CLIENT & BRAND PORTFOLIO
+   UNIQUE CLASS NAMES
+========================================================= */
+
+.av-client-marquee-section {
+  width: 100%;
+  overflow: hidden;
+  background: #050505;
+  padding: 100px 0 90px;
+}
+
+
+/* =========================================================
+   MAIN WRAPPER
+========================================================= */
+
+.av-client-marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.av-client-eyebrow {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.av-client-title {
+  color: #ffffff;
+  margin-top: 18px;
+  margin-bottom: 55px;
+
+  font-size: clamp(30px, 4.6vw, 54px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MARQUEE CONTAINER
+========================================================= */
+
+.av-client-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  margin-top: 24px;
+}
+
+
+/* =========================================================
+   MARQUEE TRACK
+========================================================= */
+
+.av-client-marquee-track {
+  display: flex;
+  align-items: center;
+
+  width: max-content;
+
+  gap: 20px;
+
+  will-change: transform;
+
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================================================
+   ROW 1
+   LEFT MOVEMENT
+========================================================= */
+
+.av-client-marquee-row-1
+.av-client-marquee-track {
+
+  animation-name: avClientMoveLeft;
+
+  animation-duration: 65s;
+
+  animation-timing-function: linear;
+
+  animation-iteration-count: infinite;
+}
+
+
+/* =========================================================
+   ROW 2
+   RIGHT MOVEMENT
+========================================================= */
+
+.av-client-marquee-row-2
+.av-client-marquee-track {
+
+  animation-name: avClientMoveRight;
+
+  animation-duration: 70s;
+
+  animation-timing-function: linear;
+
+  animation-iteration-count: infinite;
+}
+
+
+/* =========================================================
+   LOGO CARD
+========================================================= */
+
+.av-client-logo-card {
+
+  flex: 0 0 180px;
+
+  width: 180px;
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  background: #111111;
+
+  border: 1px solid rgba(205, 157, 55, 0.28);
+
+  border-radius: 18px;
+
+  padding: 16px 24px;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+
+/* =========================================================
+   LOGO IMAGE
+========================================================= */
+
+.av-client-logo-card img {
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: 140px;
+  max-height: 65px;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.av-client-logo-card:hover {
+
+  transform: translateY(-3px);
+
+  background: #151515;
+
+  border-color: rgba(205, 157, 55, 0.75);
+}
+
+
+/* =========================================================
+   ROW 1 ANIMATION
+========================================================= */
+
+@keyframes avClientMoveLeft {
+
+  0% {
+
+    transform: translate3d(0, 0, 0);
+
+  }
+
+  100% {
+
+    transform: translate3d(-50%, 0, 0);
+
+  }
+
+}
+
+
+/* =========================================================
+   ROW 2 ANIMATION
+========================================================= */
+
+@keyframes avClientMoveRight {
+
+  0% {
+
+    transform: translate3d(-50%, 0, 0);
+
+  }
+
+  100% {
+
+    transform: translate3d(0, 0, 0);
+
+  }
+
+}
+
+
+/* =========================================================
+   PAUSE WHEN HOVERING
+========================================================= */
+
+.av-client-marquee:hover
+.av-client-marquee-track {
+
+  animation-play-state: paused;
+
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .av-client-marquee-section {
+
+    padding: 70px 0 60px;
+
+  }
+
+
+  .av-client-title {
+
+    margin-top: 14px;
+
+    margin-bottom: 35px;
+
+    padding: 0 20px;
+
+  }
+
+
+  .av-client-marquee {
+
+    margin-top: 16px;
+
+  }
+
+
+  .av-client-marquee-track {
+
+    gap: 14px;
+
+  }
+
+
+  .av-client-logo-card {
+
+    flex: 0 0 150px;
+
+    width: 150px;
+
+    height: 85px;
+
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+  }
+
+
+  .av-client-logo-card img {
+
+    max-width: 115px;
+
+    max-height: 55px;
+
+  }
+
+
+  .av-client-marquee-row-1
+  .av-client-marquee-track {
+
+    animation-duration: 45s;
+
+  }
+
+
+  .av-client-marquee-row-2
+  .av-client-marquee-track {
+
+    animation-duration: 50s;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .av-client-marquee-section {
+
+    padding: 55px 0 50px;
+
+  }
+
+
+  .av-client-logo-card {
+
+    flex: 0 0 135px;
+
+    width: 135px;
+
+    height: 78px;
+
+    padding: 12px 15px;
+
+    border-radius: 12px;
+
+  }
+
+
+  .av-client-logo-card img {
+
+    max-width: 105px;
+
+    max-height: 48px;
+
+  }
+
+
+  .av-client-marquee-track {
+
+    gap: 12px;
+
+  }
+
+
+  .av-client-marquee-row-1
+  .av-client-marquee-track {
+
+    animation-duration: 40s;
+
+  }
+
+
+  .av-client-marquee-row-2
+  .av-client-marquee-track {
+
+    animation-duration: 45s;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .av-client-marquee-row-1
+  .av-client-marquee-track,
+
+  .av-client-marquee-row-2
+  .av-client-marquee-track {
+
+    animation-play-state: paused;
+
+  }
+
+}

@@ -1,6 +1,6 @@
-<?php 
+<?php
 $title = 'AMA Vision | Creative Production, Events, Films & Digital Content';
-include 'includes/header.php'; 
+include 'includes/header.php';
 ?>
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
@@ -117,6 +117,54 @@ include 'includes/header.php';
     <div class="eyebrow reveal">How we work</div>
     <div class="process-list" id="processList"></div>
   </div>
+</section>
+<!-- =========================================================
+     CLIENT & BRAND PORTFOLIO
+========================================================= -->
+
+<section id="client" class="av-client-marquee-section">
+<div class="wrap">
+  <div class="av-client-marquee-wrap">
+
+    <!-- Heading -->
+    <div class="eyebrow reveal av-client-eyebrow">
+      Client & Brand Portfolio
+    </div>
+
+    <h2 class="reveal reveal-delay-1 av-client-title text-start">
+      Brands We Have Worked With.
+    </h2>
+
+
+    <!-- =====================================================
+         ROW 1
+         Moves LEFT
+    ====================================================== -->
+
+    <div class="av-client-marquee av-client-marquee-row-1">
+
+      <div
+        class="av-client-marquee-track"
+        id="avClientRow1"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ROW 2
+         Moves RIGHT
+    ====================================================== -->
+
+    <div class="av-client-marquee av-client-marquee-row-2">
+
+      <div
+        class="av-client-marquee-track"
+        id="avClientRow2"></div>
+
+    </div>
+
+  </div>
+</div>
 </section>
 
 <!-- ================= CAPABILITIES ================= -->
