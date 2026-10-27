@@ -1355,7 +1355,7 @@ table {
   padding: 16px 24px;
   flex-shrink: 0;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
-  transition: transform 0.3s cubic-bezier(.22,.7,.2,1), border-color 0.3s cubic-bezier(.22,.7,.2,1), background 0.3s cubic-bezier(.22,.7,.2,1), box-shadow 0.3s cubic-bezier(.22,.7,.2,1);
+  transition: transform 0.3s cubic-bezier(.22, .7, .2, 1), border-color 0.3s cubic-bezier(.22, .7, .2, 1), background 0.3s cubic-bezier(.22, .7, .2, 1), box-shadow 0.3s cubic-bezier(.22, .7, .2, 1);
   cursor: pointer;
   box-sizing: border-box;
 }
@@ -1368,7 +1368,7 @@ table {
   object-fit: contain;
   display: block;
   filter: brightness(0.96) contrast(1.05);
-  transition: transform 0.3s cubic-bezier(.22,.7,.2,1), filter 0.3s cubic-bezier(.22,.7,.2,1);
+  transition: transform 0.3s cubic-bezier(.22, .7, .2, 1), filter 0.3s cubic-bezier(.22, .7, .2, 1);
   pointer-events: none;
 }
 
@@ -1386,13 +1386,23 @@ table {
 
 /* Marquee Animations */
 @keyframes brandMarqueeLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes brandMarqueeRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .marquee-left {
@@ -1417,24 +1427,29 @@ table {
   .brand-portfolio-section {
     padding: 80px 0 70px;
   }
+
   .brand-portfolio-head {
     margin-bottom: 36px;
   }
+
   .brand-marquee-wrap {
     gap: 14px;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
   }
+
   .brand-marquee-group {
     gap: 14px;
     padding-right: 14px;
   }
+
   .brand-card {
     width: 155px;
     height: 82px;
     border-radius: 14px;
     padding: 12px 18px;
   }
+
   .brand-card img {
     max-height: 42px;
   }
@@ -1444,24 +1459,29 @@ table {
   .brand-portfolio-section {
     padding: 60px 0 50px;
   }
+
   .brand-portfolio-head {
     margin-bottom: 28px;
   }
+
   .brand-marquee-wrap {
     gap: 10px;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
   }
+
   .brand-marquee-group {
     gap: 10px;
     padding-right: 10px;
   }
+
   .brand-card {
     width: 130px;
     height: 70px;
     border-radius: 12px;
     padding: 10px 14px;
   }
+
   .brand-card img {
     max-height: 34px;
   }
@@ -1472,3 +1492,152 @@ table {
     animation-play-state: paused !important;
   }
 }
+
+/* ===== Services accordion: image + content panel ===== */
+.service-body-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 32px;
+  align-items: center;
+  padding: 8px 0 28px 62px
+}
+
+.service-media {
+  aspect-ratio: 16/10;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, .08)
+}
+
+.service-text p {
+  margin: 0 0 18px;
+  color: var(--gray)
+}
+
+.service-row-head {
+  cursor: pointer
+}
+
+.service-row.open .service-body {
+  max-height: 900px
+}
+
+@media (max-width:900px) {
+  .service-body-inner {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    gap: 18px
+  }
+}
+
+
+/* ===== Case study gallery thumbs ===== */
+.work-card {
+  position: relative
+}
+
+.work-thumbs {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 6px;
+  z-index: 3
+}
+
+.work-thumb {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(255, 255, 255, .35);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+  opacity: .8
+}
+
+.work-thumb.active,
+.work-thumb:hover {
+  border-color: var(--gold, #d4af37);
+  opacity: 1
+}
+
+/* ===== Content pipeline ===== */
+.pipe-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin: 30px 0 60px
+}
+
+.pipe-step {
+  padding: 22px 20px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .02)
+}
+
+.pipe-num {
+  font-size: 13px;
+  letter-spacing: .2em;
+  color: var(--gold, #d4af37);
+  margin-bottom: 12px
+}
+
+.pipe-step h3 {
+  font-size: 18px;
+  margin: 0 0 8px
+}
+
+.pipe-step p {
+  font-size: 14px;
+  color: var(--gray);
+  margin: 0
+}
+
+@media (max-width:1000px) {
+  .pipe-grid {
+    grid-template-columns: repeat(2, 1fr)
+  }
+}
+
+@media (max-width:560px) {
+  .pipe-grid {
+    grid-template-columns: 1fr
+  }
+}
+
+.service-text .capability-chips {
+  padding-left: 0
+}
+
+.service-text p {
+  max-width: none
+}
+
+/* Empty image placeholder for case studies awaiting a photo */
+.work-empty .work-visual {
+  background: #141414 !important;
+  border: 1px dashed rgba(255, 255, 255, .2)
+}
+
+.work-placeholder {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .35);
+  z-index: 1;
+  pointer-events: none
+}
+
+#services{
+      background: var(--near-black);
+} 
+  

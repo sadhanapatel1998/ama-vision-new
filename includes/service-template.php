@@ -8,7 +8,7 @@ $heroTitle=$s[0]; $heroSub=$s[2]; $heroImg=$s[1]; $crumb='<a href="services.php"
   </div>
   <div class="reveal reveal-delay-1">
     <div class="photo" style="background-image:url('<?= img($IMG[$s[1]],1000) ?>')"></div>
-    <p class="quote" style="font-size:24px">Design not only for the stage — but for audience movement, engagement, content generation and brand visibility.</p>
+    <p class="quote" style="font-size:20px;font-family: 'Space Grotesk';">Design not only for the stage — but for audience movement, engagement, content generation and brand visibility.</p>
   </div>
 </div></section>
 <section class="section"><div class="wrap">

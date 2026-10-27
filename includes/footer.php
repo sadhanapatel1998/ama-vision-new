@@ -41,8 +41,8 @@ require_once __DIR__ . '/data.php';
           <h4>Contact</h4>
           <ul>
             <li><a href="mailto:<?= $site['email'] ?>"><?= $site['email'] ?></a></li>
-            <li><a href="tel:<?= preg_replace('/\s/', '', $site['phone']) ?>"><?= $site['phone'] ?></a></li>
-            <li><a href="<?= $site['instagram'] ?>" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="mailto:<?= $site['email2'] ?>"><?= $site['email2'] ?></a></li>
+            <li><a href="<?= $site['instagram'] ?>" target="_blank" rel="noopener"><?= $site['instagram_handle'] ?></a></li>
             <li><span style="font-size:14px;color:var(--gray)"><?= $site['location'] ?></span></li>
           </ul>
         </div>
@@ -53,6 +53,137 @@ require_once __DIR__ . '/data.php';
 </footer>
 <script src="assets/js/data.js?v=<?= filemtime(__DIR__ . "/../assets/js/data.js") ?>"></script>
 <script src="assets/js/main.js?v=<?= filemtime(__DIR__ . "/../assets/js/main.js") ?>"></script>
+<script>
+  /* =========================================
+   INDIA ENERGY WEEK SLIDER
+========================================= */
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+    const iewSlider = document.getElementById("iew-slider");
+
+    if (!iewSlider) return;
+
+    const iewTrack = document.getElementById("iew-slider-track");
+    const iewSlides = iewTrack.querySelectorAll(".iew-slide");
+    const iewPrev = document.getElementById("iew-prev");
+    const iewNext = document.getElementById("iew-next");
+    const iewDots = document.getElementById("iew-dots");
+
+    let iewCurrent = 0;
+    let iewStartX = 0;
+    let iewEndX = 0;
+
+    /* Create dots */
+
+    iewSlides.forEach((slide, index) => {
+
+      const dot = document.createElement("button");
+
+      dot.type = "button";
+      dot.className = "iew-dot";
+
+      if (index === 0) {
+        dot.classList.add("active");
+      }
+
+      dot.addEventListener("click", function() {
+        iewCurrent = index;
+        iewUpdateSlider();
+      });
+
+      iewDots.appendChild(dot);
+
+    });
+
+    const iewDotItems = iewDots.querySelectorAll(".iew-dot");
+
+
+    /* Update Slider */
+
+    function iewUpdateSlider() {
+
+      iewTrack.style.transform =
+        `translateX(-${iewCurrent * 100}%)`;
+
+      iewDotItems.forEach((dot, index) => {
+
+        dot.classList.toggle(
+          "active",
+          index === iewCurrent
+        );
+
+      });
+
+    }
+
+
+    /* Next */
+
+    iewNext.addEventListener("click", function() {
+
+      iewCurrent++;
+
+      if (iewCurrent >= iewSlides.length) {
+        iewCurrent = 0;
+      }
+
+      iewUpdateSlider();
+
+    });
+
+
+    /* Previous */
+
+    iewPrev.addEventListener("click", function() {
+
+      iewCurrent--;
+
+      if (iewCurrent < 0) {
+        iewCurrent = iewSlides.length - 1;
+      }
+
+      iewUpdateSlider();
+
+    });
+
+
+    /* Touch Swipe */
+
+    iewSlider.addEventListener("touchstart", function(event) {
+
+      iewStartX = event.touches[0].clientX;
+
+    }, {
+      passive: true
+    });
+
+
+    iewSlider.addEventListener("touchend", function(event) {
+
+      iewEndX = event.changedTouches[0].clientX;
+
+      const iewDifference = iewStartX - iewEndX;
+
+      if (Math.abs(iewDifference) < 50) return;
+
+      if (iewDifference > 0) {
+        iewNext.click();
+      } else {
+        iewPrev.click();
+      }
+
+    }, {
+      passive: true
+    });
+
+
+    /* Initial */
+
+    iewUpdateSlider();
+
+  });
+</script>
 </body>
 
 </html>

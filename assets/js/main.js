@@ -14,23 +14,38 @@ try {
   SERVICES.forEach((s, i) => {
     const row = el("div", "service-row");
     row.innerHTML = `
-    <div class="service-row-head">
+    <div class="service-row-head" role="button" tabindex="0" aria-expanded="false">
       <span class="service-num">${String(i + 1).padStart(2, "0")}</span>
       <span class="service-title">${s.title}</span>
       <span class="service-plus"></span>
     </div>
     <div class="service-body">
-      <p style="padding-left:62px;">${s.desc}</p>
-      <div class="capability-chips">${s.caps.map((c) => `<span class="chip">${c}</span>`).join("")}</div>
+      <div class="service-body-inner">
+        <div class="service-media" style="background-image:url('${s.img}')" role="img" aria-label="${s.title}"></div>
+        <div class="service-text">
+          <p>${s.long || s.desc}</p>
+          <div class="capability-chips">${s.caps.map((c) => `<span class="chip">${c}</span>`).join("")}</div>
+        </div>
+      </div>
     </div>`;
-    row.addEventListener("click", () => {
+    const head = row.querySelector(".service-row-head");
+    const toggle = () => {
       const wasOpen = row.classList.contains("open");
-      document
-        .querySelectorAll(".service-row.open")
-        .forEach((r) => r.classList.remove("open"));
-      if (!wasOpen) row.classList.add("open");
+      servicesList.querySelectorAll(".service-row.open").forEach((r) => {
+        r.classList.remove("open");
+        r.querySelector(".service-row-head").setAttribute("aria-expanded", "false");
+      });
+      if (!wasOpen) {
+        row.classList.add("open");
+        head.setAttribute("aria-expanded", "true");
+      }
+    };
+    head.addEventListener("click", toggle);
+    head.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
     servicesList.appendChild(row);
+    if (i === 0) { row.classList.add("open"); head.setAttribute("aria-expanded", "true"); }
   });
 } catch (e) {}
 try {
@@ -69,7 +84,7 @@ try {
   const projectsToShow = isWorkPage ? PROJECTS : PROJECTS.slice(0, 4);
 
   projectsToShow.forEach((p, i) => {
-    const card = el("div", "work-card");
+    const card = el("div", "work-card" + (p.img ? "" : " work-empty"));
 
     card.dataset.cat = p.category;
     card.dataset.cats = (p.tags || [p.category]).join(",");
@@ -84,6 +99,7 @@ try {
       }${gradients[i % gradients.length]};"
     ></div>
 
+    ${p.img ? "" : '<div class="work-placeholder">Add image here</div>'}
     <div class="work-overlay">
       <div class="work-meta">
         <span>${p.category}</span>
@@ -99,7 +115,26 @@ try {
 
       <div class="work-desc">${p.desc}</div>
     </div>
+    ${
+      p.gallery && p.gallery.length > 1
+        ? `<div class="work-thumbs">${p.gallery
+            .map(
+              (g, gi) =>
+                `<button type="button" class="work-thumb${gi === 0 ? " active" : ""}" data-src="${g}" aria-label="${p.title} image ${gi + 1}" style="background-image:url('${g}')"></button>`,
+            )
+            .join("")}</div>`
+        : ""
+    }
   `;
+    card.querySelectorAll(".work-thumb").forEach((t) =>
+      t.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        const vis = card.querySelector(".work-visual");
+        vis.style.background = `linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('${t.dataset.src}') center/cover`;
+        card.querySelectorAll(".work-thumb").forEach((x) => x.classList.remove("active"));
+        t.classList.add("active");
+      }),
+    );
 
     workGrid.appendChild(card);
   });
@@ -352,6 +387,39 @@ try {
     },
     { threshold: 0.3 },
   ).observe(document.getElementById("flowSteps"));
+} catch (e) {}
+try {
+  // Animated stat counters (About page): 0 -> target on scroll, eased, once
+  const counters = document.querySelectorAll(".count-up");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const run = (el) => {
+    const target = +el.dataset.target, suffix = el.dataset.suffix || "";
+    if (reduce) { el.textContent = target + suffix; return; }
+    const dur = 1600, t0 = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target + suffix;
+    };
+    requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { run(en.target); io.unobserve(en.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach((c) => io.observe(c));
+  } else counters.forEach((c) => (c.textContent = c.dataset.target + (c.dataset.suffix || "")));
+} catch (e) {}
+try {
+  // Content pipeline
+  const pl = document.getElementById("contentPipeline");
+  if (pl) CONTENT_PIPELINE.forEach((p, i) => {
+    const it = el("div", "pipe-step reveal");
+    it.innerHTML = `<div class="pipe-num">${String(i + 1).padStart(2, "0")}</div><h3>${p.title}</h3><p>${p.desc}</p>`;
+    pl.appendChild(it);
+  });
 } catch (e) {}
 try {
   // Number counters

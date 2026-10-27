@@ -1,5 +1,5 @@
 <?php $title='Industries | AMA Vision'; include 'includes/header.php';
-$heroTitle='Built for Different Worlds'; $crumb='Industries'; $heroSub='Eleven sectors, one production discipline.'; $heroImg='conf2'; include 'includes/page-hero.php'; ?>
+$heroTitle='Built for Different Worlds'; $crumb='Industries'; $heroSub='15+ industries, one production discipline.'; $heroImg='conf2'; include 'includes/page-hero.php'; ?>
 <section class="section"><div class="wrap">
   <div class="eyebrow reveal">Industries &amp; sectors</div>
   <h2 class="h2 reveal">Where we work</h2>
