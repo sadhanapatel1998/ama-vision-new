@@ -6,7 +6,8 @@ require_once __DIR__ . '/data.php';
   <div class="hero-orb orb2" style="left:50%; top:-100px;"></div>
   <div class="wrap">
     <h2 class="reveal">HAVE AN IDEA?</h2>
-    <p class="reveal reveal-delay-1">Let's bring your vision to life — from the first conversation to the final frame.</p>
+    <p class="reveal reveal-delay-1">Let's bring your vision to life — from the first conversation to the final frame.
+    </p>
     <div class="cta-buttons reveal reveal-delay-2">
       <a href="contact.php" class="btn btn-gold">Start a Project <span class="arrow">→</span></a>
       <a href="contact.php" class="btn btn-ghost">Talk to AMA Vision</a>
@@ -18,7 +19,8 @@ require_once __DIR__ . '/data.php';
     <div class="footer-top">
       <div>
         <img src="assets/img/logo-full.png" alt="AMA Vision — Bring your vision to life" class="footer-logo">
-        <p class="footer-tag" style="max-width:300px">Integrated creative production — events, films, digital content and experiences.</p>
+        <p class="footer-tag" style="max-width:300px">Integrated creative production — events, films, digital content
+          and experiences.</p>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
@@ -35,20 +37,24 @@ require_once __DIR__ . '/data.php';
         <div class="footer-col">
           <h4>Services</h4>
           <ul>
-            <?php foreach ($SERVICES as $k => $s): ?><li><a href="<?= $k ?>.php"><?= $s[0] ?></a></li><?php endforeach; ?></ul>
+            <?php foreach ($SERVICES as $k => $s): ?>
+              <li><a href="<?= $k ?>.php"><?= $s[0] ?></a></li><?php endforeach; ?>
+          </ul>
         </div>
         <div class="footer-col">
           <h4>Contact</h4>
           <ul>
             <li><a href="mailto:<?= $site['email'] ?>"><?= $site['email'] ?></a></li>
             <li><a href="mailto:<?= $site['email2'] ?>"><?= $site['email2'] ?></a></li>
-            <li><a href="<?= $site['instagram'] ?>" target="_blank" rel="noopener"><?= $site['instagram_handle'] ?></a></li>
+            <li><a href="<?= $site['instagram'] ?>" target="_blank" rel="noopener"><?= $site['instagram_handle'] ?></a>
+            </li>
             <li><span style="font-size:14px;color:var(--gray)"><?= $site['location'] ?></span></li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="footer-bottom"><span>© <?= date('Y') ?> AMA Vision. All Rights Reserved.</span><span>Bring your vision to life.</span></div>
+    <div class="footer-bottom"><span>© <?= date('Y') ?> AMA Vision. All Rights Reserved.</span><span>Bring your vision
+        to life.</span></div>
   </div>
 </footer>
 <script src="assets/js/data.js?v=<?= filemtime(__DIR__ . "/../assets/js/data.js") ?>"></script>
@@ -58,7 +64,7 @@ require_once __DIR__ . '/data.php';
    INDIA ENERGY WEEK SLIDER
 ========================================= */
 
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const iewSlider = document.getElementById("iew-slider");
 
@@ -87,7 +93,7 @@ require_once __DIR__ . '/data.php';
         dot.classList.add("active");
       }
 
-      dot.addEventListener("click", function() {
+      dot.addEventListener("click", function () {
         iewCurrent = index;
         iewUpdateSlider();
       });
@@ -120,7 +126,7 @@ require_once __DIR__ . '/data.php';
 
     /* Next */
 
-    iewNext.addEventListener("click", function() {
+    iewNext.addEventListener("click", function () {
 
       iewCurrent++;
 
@@ -135,7 +141,7 @@ require_once __DIR__ . '/data.php';
 
     /* Previous */
 
-    iewPrev.addEventListener("click", function() {
+    iewPrev.addEventListener("click", function () {
 
       iewCurrent--;
 
@@ -150,7 +156,7 @@ require_once __DIR__ . '/data.php';
 
     /* Touch Swipe */
 
-    iewSlider.addEventListener("touchstart", function(event) {
+    iewSlider.addEventListener("touchstart", function (event) {
 
       iewStartX = event.touches[0].clientX;
 
@@ -159,7 +165,7 @@ require_once __DIR__ . '/data.php';
     });
 
 
-    iewSlider.addEventListener("touchend", function(event) {
+    iewSlider.addEventListener("touchend", function (event) {
 
       iewEndX = event.changedTouches[0].clientX;
 
@@ -181,6 +187,82 @@ require_once __DIR__ . '/data.php';
     /* Initial */
 
     iewUpdateSlider();
+
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const player = document.getElementById("reelPlayer");
+    const video = document.getElementById("reelVideo");
+    const button = document.getElementById("reelPlayButton");
+    if (!player || !video || !button) return;
+    /* =========================
+       UPDATE BUTTON
+    ========================= */
+
+    function updateButton() {
+      if (video.paused) {
+        // PLAY
+        button.classList.remove("is-pause");
+        button.setAttribute("aria-label", "Play video");
+      } else {
+        // PAUSE
+        button.classList.add("is-pause");
+        button.setAttribute("aria-label", "Pause video");
+      }
+    }
+    /* =========================
+       PLAY / PAUSE
+    ========================= */
+    function toggleVideo() {
+      if (video.paused) {
+        video.play()
+          .then(function () {
+            updateButton();
+          })
+          .catch(function (error) {
+            console.error("Video play failed:", error);
+          });
+      } else {
+        video.pause();
+        updateButton();
+      }
+    }
+    /* =========================
+       BUTTON CLICK
+    ========================= */
+
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleVideo();
+    });
+    /* =========================
+       VIDEO CLICK
+    ========================= */
+    video.addEventListener("click", function () {
+      toggleVideo();
+    });
+    /* =========================
+       VIDEO EVENTS
+    ========================= */
+
+    video.addEventListener("play", function () {
+      player.classList.add("is-playing");
+      updateButton();
+    });
+    video.addEventListener("pause", function () {
+      player.classList.remove("is-playing");
+      updateButton();
+    });
+    video.addEventListener("ended", function () {
+      player.classList.remove("is-playing");
+      // Back to PLAY icon
+      updateButton();
+    });
+    /* Initial state */
+    updateButton();
 
   });
 </script>

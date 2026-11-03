@@ -58,7 +58,27 @@ include 'includes/header.php';
     </div>
 </section>
 
-<!-- ================= SERVICES ================= -->
+<!-- ================= Showreel ================= -->
+<section class="section reel-section py-0">
+    <div class="wrap">
+        <div class="eyebrow reveal">Showreel</div>
+        <h2 class="h2 reveal">
+            See the vision<br>
+            <span class="muted">in motion.</span>
+        </h2>
+        <div class="reel-player reveal" id="reelPlayer">
+            <video id="reelVideo" class="reel-video" preload="auto" playsinline webkit-playsinline>
+                <source src="assets/img/ama-vision-video.mp4" type="video/mp4">
+            </video>
+            <div class="reel-overlay"></div>
+            <button type="button" class="reel-play-button" id="reelPlayButton" aria-label="Play video">
+                <span class="reel-play-icon"></span>
+            </button>
+        </div>
+    </div>
+</section>
+
+
 <section class="section" id="services">
     <div class="wrap">
         <div class="services-head reveal">
@@ -97,28 +117,25 @@ include 'includes/header.php';
 </section>
 
 <!-- ================= WORK / PORTFOLIO ================= -->
-<!-- <section class="section" id="work">
-    <div class="wrap">
-        <div class="eyebrow reveal">Selected work</div>
-        <h2 class="reveal reveal-delay-1"
-            style="font-size:clamp(30px,4.6vw,54px); text-transform:uppercase; margin:18px 0 46px;">FROM
-            CONCEPT<br><span style="color:var(--gray);">TO DELIVERY.</span></h2>
-        <div class="filters reveal reveal-delay-2" id="filters"></div>
-        <div class="work-grid" id="workGrid"></div>
-        <div style="margin-top:40px"><a href="work.php" class="btn btn-ghost">View all work</a></div>
-    </div>
-</section> -->
 
-
-<section class="section" id="work">
+ <section class="section" id="work">
     <div class="wrap">
         <div class="eyebrow reveal in">Selected work</div>
-        <h2 class="reveal reveal-delay-1 in" style="font-size:clamp(30px,4.6vw,54px); text-transform:uppercase; margin:18px 0 46px;">FROM
+        <h2 class="reveal reveal-delay-1 in"
+            style="font-size:clamp(30px,4.6vw,54px); text-transform:uppercase; margin:18px 0 46px;">FROM
             CONCEPT<br><span style="color:var(--gray);">TO DELIVERY.</span></h2>
-        <div class="filters reveal reveal-delay-2" id="filters"><button class="filter-btn active" data-cat="All">All</button><button class="filter-btn" data-cat="Events">Events</button><button class="filter-btn" data-cat="Brand Films">Brand Films</button><button class="filter-btn" data-cat="Campaigns">Campaigns</button><button class="filter-btn" data-cat="Content">Content</button><button class="filter-btn" data-cat="Experiences">Experiences</button><button class="filter-btn" data-cat="Documentaries">Documentaries</button></div>
+        <div class="filters reveal reveal-delay-2" id="filters"><button class="filter-btn active"
+                data-cat="All">All</button><button class="filter-btn" data-cat="Events">Events</button><button
+                class="filter-btn" data-cat="Brand Films">Brand Films</button><button class="filter-btn"
+                data-cat="Campaigns">Campaigns</button><button class="filter-btn"
+                data-cat="Content">Content</button><button class="filter-btn"
+                data-cat="Experiences">Experiences</button><button class="filter-btn"
+                data-cat="Documentaries">Documentaries</button></div>
         <div class="work-grid">
             <div class="work-card" data-cat="Events" data-cats="Events,Documentaries">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/g20.jpg') center/cover,linear-gradient(135deg,#24103D,#6D35A8);"></div>
+                <div class="work-visual"
+                    style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/g20.jpg') center/cover,linear-gradient(135deg,#24103D,#6D35A8);">
+                </div>
                 <div class="work-overlay">
                     <div class="work-meta">
                         <span>Events</span>
@@ -132,11 +149,9 @@ include 'includes/header.php';
                     <div class="work-desc">Large-scale, protocol-sensitive production experience.</div>
                 </div>
             </div>
-            <!-- India Energy Week Slider End-->
             <div id="iew-slider" class="iew-slider">
                 <div id="iew-slider-track" class="iew-slider-track">
 
-                    <!-- IEW 2026 -->
                     <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
                         <div class="work-visual"
                             style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2026.jpg') center/cover,linear-gradient(135deg,#111114,#24103D);">
@@ -162,7 +177,6 @@ include 'includes/header.php';
                     </div>
 
 
-                    <!-- IEW 2025 -->
                     <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
                         <div class="work-visual"
                             style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2025.jpg') center/cover,linear-gradient(135deg,#18181D,#6D35A8);">
@@ -188,7 +202,6 @@ include 'includes/header.php';
                     </div>
 
 
-                    <!-- IEW 2024 -->
                     <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
                         <div class="work-visual"
                             style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2024.jpg') center/cover,linear-gradient(135deg,#0A0A0D,#24103D);">
@@ -214,7 +227,6 @@ include 'includes/header.php';
                     </div>
 
                 </div>
-                <!-- Slider Controls -->
                 <button type="button" id="iew-prev" class="iew-slider-btn iew-prev">
                     &#10094;
                 </button>
@@ -223,9 +235,10 @@ include 'includes/header.php';
                 </button>
                 <div id="iew-dots" class="iew-slider-dots"></div>
             </div>
-            <!-- India Energy Week Slider End-->
             <div class="work-card" data-cat="Events" data-cats="Events,Brand Films">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/gridcon.jpg') center/cover,linear-gradient(135deg,#24103D,#18181D);"></div>
+                <div class="work-visual"
+                    style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/gridcon.jpg') center/cover,linear-gradient(135deg,#24103D,#18181D);">
+                </div>
                 <div class="work-overlay">
                     <div class="work-meta">
                         <span>Events</span>
@@ -240,7 +253,9 @@ include 'includes/header.php';
                 </div>
             </div>
             <div class="work-card" data-cat="Experiences" data-cats="Experiences,Brand Films">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/red-fort.jpg') center/cover,linear-gradient(135deg,#111114,#6D35A8);"></div>
+                <div class="work-visual"
+                    style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/red-fort.jpg') center/cover,linear-gradient(135deg,#111114,#6D35A8);">
+                </div>
 
 
                 <div class="work-overlay">
@@ -263,7 +278,7 @@ include 'includes/header.php';
         </div>
         <div style="margin-top:40px"><a href="work.php" class="btn btn-ghost">View all work</a></div>
     </div>
-</section>
+</section> 
 
 <!-- ================= EVENT PRODUCTION FEATURE ================= -->
 <section class="section transform-section" id="events">
@@ -406,7 +421,7 @@ include 'includes/header.php';
 </section>
 
 <!-- ================= SHOWREEL ================= -->
-<section class="section reel-section">
+<!-- <section class="section reel-section">
     <div class="wrap">
         <div class="eyebrow reveal">Showreel</div>
         <h2 class="reveal reveal-delay-1"
@@ -417,6 +432,6 @@ include 'includes/header.php';
             <div class="play-btn"></div>
         </div>
     </div>
-</section>
+</section> -->
 
 <?php include 'includes/footer.php'; ?>

@@ -5,234 +5,337 @@ $heroTitle = 'Work / Case Studies';
 $heroSub = 'Selected productions across government, energy, corporate and experiential environments.';
 $heroImg = 'concert';
 include 'includes/page-hero.php';
+
+/* ─── Build unique filter categories from $works ─── */
+$_filterCats = ['All'];
+foreach ($works as $_w) {
+    foreach ($_w['categories'] as $_c) {
+        if (!in_array($_c, $_filterCats))
+            $_filterCats[] = $_c;
+    }
+}
+
+/* ─── Gradient palette (cycles automatically) ─── */
+$_grads = [
+    'linear-gradient(135deg,#24103D,#6D35A8)',
+    'linear-gradient(135deg,#111114,#24103D)',
+    'linear-gradient(135deg,#18181D,#6D35A8)',
+    'linear-gradient(135deg,#0A0A0D,#24103D)',
+    'linear-gradient(135deg,#24103D,#18181D)',
+    'linear-gradient(135deg,#111114,#6D35A8)',
+];
 ?>
+
+<!-- ================= WORK / PORTFOLIO ================= -->
 <section class="section work-section">
     <div class="wrap">
         <div class="eyebrow reveal">Selected work</div>
         <h2 class="h2 reveal">From concept<br><span class="muted">to delivery.</span></h2>
-        <div class="filters reveal" id="filters"></div>
-        <div class="work-grid">
-            <div class="work-card" data-cat="Events" data-cats="Events,Documentaries">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/g20.jpg') center/cover,linear-gradient(135deg,#24103D,#6D35A8);"></div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Events</span>
-                        <span>2023</span>
-                    </div>
-                    <div class="work-title">G20 Summit</div>
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Government / International</span>
-                        <span>New Delhi</span>
-                    </div>
-                    <div class="work-desc">Large-scale, protocol-sensitive production experience.</div>
-                </div>
-            </div>
-            <!-- India Energy Week Slider End-->
-            <div id="iew-slider" class="iew-slider">
-                <div id="iew-slider-track" class="iew-slider-track">
 
-                    <!-- IEW 2026 -->
-                    <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
-                        <div class="work-visual"
-                            style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2026.jpg') center/cover,linear-gradient(135deg,#111114,#24103D);">
-                        </div>
-
-                        <div class="work-overlay">
-                            <div class="work-meta">
-                                <span>Events</span>
-                                <span>2026</span>
-                            </div>
-
-                            <div class="work-title">India Energy Week 2026</div>
-
-                            <div class="work-meta" style="margin-bottom:0;">
-                                <span>GAIL &amp; Petronet ecosystem</span>
-                                <span>Goa</span>
-                            </div>
-
-                            <div class="work-desc">
-                                Fourth edition of India Energy Week - event production and on-ground content.
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- IEW 2025 -->
-                    <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
-                        <div class="work-visual"
-                            style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2025.jpg') center/cover,linear-gradient(135deg,#18181D,#6D35A8);">
-                        </div>
-
-                        <div class="work-overlay">
-                            <div class="work-meta">
-                                <span>Events</span>
-                                <span>2025</span>
-                            </div>
-
-                            <div class="work-title">India Energy Week 2025</div>
-
-                            <div class="work-meta" style="margin-bottom:0;">
-                                <span>Energy / Government</span>
-                                <span>Yashobhoomi, New Delhi</span>
-                            </div>
-
-                            <div class="work-desc">
-                                Multi-day energy conference production and live coverage.
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- IEW 2024 -->
-                    <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
-                        <div class="work-visual"
-                            style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2024.jpg') center/cover,linear-gradient(135deg,#0A0A0D,#24103D);">
-                        </div>
-
-                        <div class="work-overlay">
-                            <div class="work-meta">
-                                <span>Events</span>
-                                <span>2024</span>
-                            </div>
-
-                            <div class="work-title">India Energy Week 2024</div>
-
-                            <div class="work-meta" style="margin-bottom:0;">
-                                <span>Energy / Government ecosystem</span>
-                                <span>Goa</span>
-                            </div>
-
-                            <div class="work-desc">
-                                Held in Goa - high-impact conference production, stages and live coverage.
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- Slider Controls -->
-                <button type="button" id="iew-prev" class="iew-slider-btn iew-prev">
-                    &#10094;
+        <!-- Filter buttons (auto-built from PHP categories) -->
+        <div class="filters reveal" id="wpFilters">
+            <?php foreach ($_filterCats as $_ci => $_cat): ?>
+                <button class="filter-btn<?= $_ci === 0 ? ' active' : '' ?>" data-cat="<?= htmlspecialchars($_cat) ?>">
+                    <?= htmlspecialchars($_cat) ?>
                 </button>
-                <button type="button" id="iew-next" class="iew-slider-btn iew-next">
-                    &#10095;
-                </button>
-                <div id="iew-dots" class="iew-slider-dots"></div>
-            </div>
-            <!-- India Energy Week Slider End-->
-            <div class="work-card" data-cat="Events" data-cats="Events,Brand Films">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/gridcon.jpg') center/cover,linear-gradient(135deg,#24103D,#18181D);"></div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Events</span>
-                        <span>2025</span>
-                    </div>
-                    <div class="work-title">GRIDCON 2025</div>
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>POWERGRID</span>
-                        <span>Yashobhoomi, New Delhi</span>
-                    </div>
-                    <div class="work-desc">International conference-cum-exhibition - production and content.</div>
-                </div>
-            </div>
-            <div class="work-card" data-cat="Experiences" data-cats="Experiences,Brand Films">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/red-fort.jpg') center/cover,linear-gradient(135deg,#111114,#6D35A8);"></div>
-
-
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Experiences</span>
-                        <span>2025</span>
-                    </div>
-
-                    <div class="work-title">Times Black x ICICI Bank</div>
-
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Luxury experiential</span>
-                        <span>Red Fort, Delhi</span>
-                    </div>
-
-                    <div class="work-desc">A premium experiential evening at the Red Fort.</div>
-                </div>
-
-            </div>
-            <div class="work-card" data-cat="Events" data-cats="Events,Experiences">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/exl.jpg') center/cover,linear-gradient(135deg,#24103D,#6D35A8);"></div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Events</span>
-                        <span>2026</span>
-                    </div>
-
-                    <div class="work-title">EXL Three-Day Event</div>
-
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Corporate</span>
-                        <span>Gurgaon</span>
-                    </div>
-
-                    <div class="work-desc">
-                        Global Technology Annual Planning &amp; Leaders' Meeting January 2026
-                    </div>
-                </div>
-
-            </div>
-            <div class="work-card" data-cat="Events" data-cats="Events,Documentaries">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/brics.jpg') center/cover,linear-gradient(135deg,#111114,#24103D);"></div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Events</span>
-                        <span>2026</span>
-                    </div>
-                    <div class="work-title">BRICS</div>
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Government / International</span>
-                        <span>India</span>
-                    </div>
-                    <div class="work-desc">International event credential and high-level protocol production in India.</div>
-                </div>
-            </div>
-            <div class="work-card" data-cat="Content" data-cats="Content,Campaigns">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/indus-food-2023.jpg') center/cover,linear-gradient(135deg,#18181D,#6D35A8);"></div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Content</span>
-                        <span>2026</span>
-                    </div>
-                    <div class="work-title">Indus Food 2023</div>
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Exhibition / Trade</span>
-                        <span>India Expo Mart</span>
-                    </div>
-                    <div class="work-desc">On-ground content across a multi-hall trade show.</div>
-                </div>
-            </div>
-            <div class="work-card" data-cat="Content" data-cats="Content,Events,Campaigns">
-                <div class="work-visual" style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/india-expo.jpg') center/cover,linear-gradient(135deg,#0A0A0D,#24103D);"></div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Content</span>
-                        <span>2024</span>
-                    </div>
-                    <div class="work-title">India Expo</div>
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Exhibition / Trade</span>
-                        <span>Yashobhoomi · Pragati Maidan · India Expo Mart</span>
-                    </div>
-                    <div class="work-desc">Exhibition and event production across Yashobhoomi, Pragati Maidan and India Expo Mart, Greater Noida.</div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
-        <!-- <div class="work-grid" id="workGrid"></div> -->
+
+        <!-- ─── Work Grid ─── -->
+        <div class="work-grid" id="workGrid">
+            <?php foreach ($works as $_i => $_work):
+                /* Resolve gallery: use 'gallery' key if available, else fall back to single 'image' */
+                $_gallery = !empty($_work['gallery'])
+                    ? $_work['gallery']
+                    : (isset($_work['image']) ? [$_work['image']] : []);
+                $_imgCount = count($_gallery);
+                $_firstImg = $_imgCount > 0 ? htmlspecialchars($_gallery[0]) : '';
+                $_grad = $_grads[$_i % count($_grads)];
+                $_cats = implode(',', $_work['categories']);
+
+                /* Encode gallery for JS (escaped for HTML attribute safety) */
+                $_galleryJson = htmlspecialchars(
+                    json_encode($_gallery, JSON_UNESCAPED_SLASHES),
+                    ENT_QUOTES
+                );
+                ?>
+                <div class="work-card" data-cat="<?= htmlspecialchars($_work['category']) ?>"
+                    data-cats="<?= htmlspecialchars($_cats) ?>" data-gallery="<?= $_galleryJson ?>"
+                    data-grad="<?= htmlspecialchars($_grad) ?>">
+
+                    <!-- Background visual (first image shown by default) -->
+                    <div class="work-visual" style="background:<?= $_firstImg
+                        ? "linear-gradient(0deg,rgba(5,5,5,.38),rgba(5,5,5,.08)),url('{$_firstImg}') center/cover,"
+                        : '' ?><?= $_grad ?>;"></div>
+
+                    <!-- Text overlay -->
+                    <div class="work-overlay">
+                        <div class="work-meta">
+                            <span><?= htmlspecialchars($_work['category']) ?></span>
+                            <span><?= htmlspecialchars($_work['year']) ?></span>
+                        </div>
+                        <div class="work-title"><?= htmlspecialchars($_work['title']) ?></div>
+                        <div class="work-meta" style="margin-bottom:0;">
+                            <span><?= htmlspecialchars($_work['client']) ?></span>
+                            <span><?= htmlspecialchars($_work['location']) ?></span>
+                        </div>
+                        <div class="work-desc"><?= htmlspecialchars($_work['description']) ?></div>
+                    </div>
+
+                    <?php if ($_imgCount > 1): ?>
+                        <!-- ─── Per-card image slider controls (only when >1 image) ─── -->
+                        <button type="button" class="wc-btn wc-prev" aria-label="Previous image">&#10094;</button>
+                        <button type="button" class="wc-btn wc-next" aria-label="Next image">&#10095;</button>
+                        <div class="wc-dots">
+                            <?php for ($_d = 0; $_d < $_imgCount; $_d++): ?>
+                                <button type="button" class="wc-dot<?= $_d === 0 ? ' active' : '' ?>" data-idx="<?= $_d ?>"
+                                    aria-label="Image <?= $_d + 1 ?>"></button>
+                            <?php endfor; ?>
+                        </div>
+                    <?php endif; ?>
+
+                </div><!-- /.work-card -->
+
+            <?php endforeach; ?>
+
+        </div><!-- /#workGrid -->
     </div>
 </section>
+
+<!-- ================= SHOWREEL ================= -->
 <section class="section reel-section">
     <div class="wrap">
         <div class="eyebrow reveal">Showreel</div>
-        <h2 class="h2 reveal">See the vision<br><span class="muted">in motion.</span></h2>
-        <div class="reel-player reveal" id="reelPlayer"
-            style="background:linear-gradient(0deg,rgba(5,5,5,.5),rgba(5,5,5,.2)),url('<?= img($IMG['film'], 1800) ?>') center/cover">
-            <div class="play-btn"></div>
+        <h2 class="h2 reveal">
+            See the vision<br>
+            <span class="muted">in motion.</span>
+        </h2>
+        <div class="reel-player reveal" id="reelPlayer">
+            <video id="reelVideo" class="reel-video" preload="auto" playsinline webkit-playsinline>
+                <source src="assets/img/ama-vision-video.mp4" type="video/mp4">
+            </video>
+            <div class="reel-overlay"></div>
+            <button type="button" class="reel-play-button" id="reelPlayButton" aria-label="Play video">
+                <span class="reel-play-icon"></span>
+            </button>
         </div>
     </div>
 </section>
+
+<!-- ══════════════════════════════════════════
+     PER-CARD SLIDER STYLES
+     ══════════════════════════════════════════ -->
+<style>
+    /* ── Per-card prev / next buttons ── */
+    .wc-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-60%);
+        /* slightly above centre so they clear the text overlay */
+        z-index: 20;
+        background: rgba(5, 5, 5, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #fff;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        font-size: 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background .22s, border-color .22s, transform .22s;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        line-height: 1;
+        padding: 0;
+    }
+
+    .wc-btn:hover {
+        background: rgba(217, 174, 94, .28);
+        border-color: rgba(217, 174, 94, .55);
+        transform: translateY(-60%) scale(1.08);
+    }
+
+    .wc-prev {
+        left: 12px;
+    }
+
+    .wc-next {
+        right: 12px;
+    }
+
+    /* ── Dot indicators ── */
+    .wc-dots {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        z-index: 20;
+    }
+
+    .wc-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.32);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: background .22s, transform .22s;
+    }
+
+    .wc-dot.active {
+        background: #d9ae5e;
+        transform: scale(1.35);
+    }
+
+    .wc-dot:hover {
+        background: rgba(255, 255, 255, .65);
+    }
+
+    /* ── Smooth image transition on .work-visual ── */
+    .work-card .work-visual {
+        transition: background-image .35s ease;
+    }
+
+    /* ── Responsive tweaks ── */
+    @media (max-width: 640px) {
+        .wc-btn {
+            width: 32px;
+            height: 32px;
+            font-size: 12px;
+        }
+
+        .wc-dots {
+            bottom: 8px;
+            gap: 5px;
+        }
+
+        .wc-dot {
+            width: 6px;
+            height: 6px;
+        }
+    }
+</style>
+
+<!-- ══════════════════════════════════════════
+     PER-CARD INDEPENDENT SLIDER — JAVASCRIPT
+     Each card manages its own current index.
+     Clicking Next on Card A only affects Card A.
+     ══════════════════════════════════════════ -->
+<script>
+    (function () {
+        'use strict';
+
+        /* ── Initialise every card that has a data-gallery attribute ── */
+        document.querySelectorAll('.work-card[data-gallery]').forEach(function (card, cardIdx) {
+
+            /* Parse gallery JSON */
+            var gallery;
+            try {
+                gallery = JSON.parse(card.getAttribute('data-gallery'));
+            } catch (e) { return; }
+
+            if (!Array.isArray(gallery) || gallery.length === 0) return;
+
+            /* Single-image cards: nothing to do (controls not rendered by PHP) */
+            if (gallery.length === 1) return;
+
+            /* ── State ── */
+            var cur = 0;
+            var total = gallery.length;
+            var visual = card.querySelector('.work-visual');
+            var grad = card.getAttribute('data-grad') || '';
+            var dots = Array.from(card.querySelectorAll('.wc-dot'));
+            var prevBtn = card.querySelector('.wc-prev');
+            var nextBtn = card.querySelector('.wc-next');
+
+            /* ── Core: go to slide n ── */
+            function goTo(n) {
+                cur = ((n % total) + total) % total;
+                /* Update background */
+                visual.style.background =
+                    "linear-gradient(0deg,rgba(5,5,5,.38),rgba(5,5,5,.08)),url('"
+                    + gallery[cur]
+                    + "') center/cover,"
+                    + grad;
+                /* Sync dots */
+                dots.forEach(function (d, i) {
+                    d.classList.toggle('active', i === cur);
+                });
+            }
+
+            /* ── Controls ── */
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    goTo(cur - 1);
+                    resetTimer();
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    goTo(cur + 1);
+                    resetTimer();
+                });
+            }
+            dots.forEach(function (dot) {
+                dot.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    goTo(parseInt(dot.getAttribute('data-idx'), 10));
+                    resetTimer();
+                });
+            });
+
+            /* ── Auto-advance every 4 s (pauses on hover) ── */
+            var timer = setInterval(function () { goTo(cur + 1); }, 4000);
+            function resetTimer() {
+                clearInterval(timer);
+                timer = setInterval(function () { goTo(cur + 1); }, 4000);
+            }
+            card.addEventListener('mouseenter', function () { clearInterval(timer); });
+            card.addEventListener('mouseleave', function () { resetTimer(); });
+
+            /* ── Touch / swipe support ── */
+            var touchX = 0;
+            card.addEventListener('touchstart', function (e) {
+                touchX = e.touches[0].clientX;
+            }, { passive: true });
+            card.addEventListener('touchend', function (e) {
+                var dx = e.changedTouches[0].clientX - touchX;
+                if (Math.abs(dx) > 40) {
+                    goTo(dx < 0 ? cur + 1 : cur - 1);
+                    resetTimer();
+                }
+            });
+        });
+
+        /* ── Category filter (show/hide cards in the grid) ── */
+        var filtersEl = document.getElementById('wpFilters');
+        if (filtersEl) {
+            filtersEl.addEventListener('click', function (e) {
+                var btn = e.target.closest('.filter-btn');
+                if (!btn) return;
+                filtersEl.querySelectorAll('.filter-btn').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+                var cat = btn.getAttribute('data-cat');
+                document.querySelectorAll('#workGrid .work-card').forEach(function (card) {
+                    var cats = (card.getAttribute('data-cats') || card.getAttribute('data-cat') || '')
+                        .split(',').map(function (s) { return s.trim().toLowerCase(); });
+                    var show = cat === 'All' || cats.indexOf(cat.toLowerCase()) > -1;
+                    card.classList.toggle('hide', !show);
+                });
+            });
+        }
+
+    })();
+</script>
+
 <?php include 'includes/footer.php'; ?>
