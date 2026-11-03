@@ -117,169 +117,110 @@ include 'includes/header.php';
 </section>
 
 <!-- ================= WORK / PORTFOLIO ================= -->
-
- <section class="section" id="work">
+<section class="section work-section">
     <div class="wrap">
-        <div class="eyebrow reveal in">Selected work</div>
-        <h2 class="reveal reveal-delay-1 in"
-            style="font-size:clamp(30px,4.6vw,54px); text-transform:uppercase; margin:18px 0 46px;">FROM
-            CONCEPT<br><span style="color:var(--gray);">TO DELIVERY.</span></h2>
-        <div class="filters reveal reveal-delay-2" id="filters"><button class="filter-btn active"
-                data-cat="All">All</button><button class="filter-btn" data-cat="Events">Events</button><button
-                class="filter-btn" data-cat="Brand Films">Brand Films</button><button class="filter-btn"
-                data-cat="Campaigns">Campaigns</button><button class="filter-btn"
-                data-cat="Content">Content</button><button class="filter-btn"
-                data-cat="Experiences">Experiences</button><button class="filter-btn"
-                data-cat="Documentaries">Documentaries</button></div>
-        <div class="work-grid">
-            <div class="work-card" data-cat="Events" data-cats="Events,Documentaries">
-                <div class="work-visual"
-                    style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/g20.jpg') center/cover,linear-gradient(135deg,#24103D,#6D35A8);">
-                </div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Events</span>
-                        <span>2023</span>
-                    </div>
-                    <div class="work-title">G20 Summit</div>
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Government / International</span>
-                        <span>New Delhi</span>
-                    </div>
-                    <div class="work-desc">Large-scale, protocol-sensitive production experience.</div>
-                </div>
-            </div>
-            <div id="iew-slider" class="iew-slider">
-                <div id="iew-slider-track" class="iew-slider-track">
+        <div class="eyebrow reveal">Selected work</div>
+        <h2 class="h2 reveal">
+            From concept<br>
+            <span class="muted">to delivery.</span>
+        </h2>
+        <!-- ─── Work Grid : ONLY FIRST 4 ─── -->
+        <div class="work-grid" id="homeWorkGrid">
+            <?php
+            /*
+             * Show ONLY first 4 works on homepage.
+             * Full $works array remains available on work.php.
+             */
+            foreach (array_slice($works, 0, 4) as $_i => $_work):
+                $_gallery = !empty($_work['gallery'])
+                    ? $_work['gallery']
+                    : (isset($_work['image']) ? [$_work['image']] : []);
 
-                    <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
-                        <div class="work-visual"
-                            style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2026.jpg') center/cover,linear-gradient(135deg,#111114,#24103D);">
+                $_imgCount = count($_gallery);
+                $_firstImg = $_imgCount > 0
+                    ? htmlspecialchars($_gallery[0])
+                    : '';
+                $_grads = [
+                    'linear-gradient(135deg,#24103D,#6D35A8)',
+                    'linear-gradient(135deg,#111114,#24103D)',
+                    'linear-gradient(135deg,#18181D,#6D35A8)',
+                    'linear-gradient(135deg,#0A0A0D,#24103D)',
+                    'linear-gradient(135deg,#24103D,#18181D)',
+                    'linear-gradient(135deg,#111114,#6D35A8)',
+                ];
+                $_grad = $_grads[$_i % count($_grads)];
+                $_cats = implode(',', $_work['categories']);
+                $_galleryJson = htmlspecialchars(
+                    json_encode($_gallery, JSON_UNESCAPED_SLASHES),
+                    ENT_QUOTES
+                );
+                ?>
+                <div class="work-card" data-cat="<?= htmlspecialchars($_work['category']) ?>"
+                    data-cats="<?= htmlspecialchars($_cats) ?>" data-gallery="<?= $_galleryJson ?>"
+                    data-grad="<?= htmlspecialchars($_grad) ?>">
+                    <!-- Background visual -->
+                    <div class="work-visual" style="background:
+                            <?= $_firstImg
+                                ? "linear-gradient(0deg,rgba(5,5,5,.38),rgba(5,5,5,.08)),url('{$_firstImg}') center/cover,"
+                                : ''
+                                ?>
+                            <?= $_grad ?>;"></div>
+                    <!-- Text overlay -->
+                    <div class="work-overlay">
+
+                        <div class="work-meta">
+                            <span>
+                                <?= htmlspecialchars($_work['category']) ?>
+                            </span>
+                            <span>
+                                <?= htmlspecialchars($_work['year']) ?>
+                            </span>
                         </div>
-
-                        <div class="work-overlay">
-                            <div class="work-meta">
-                                <span>Events</span>
-                                <span>2026</span>
-                            </div>
-
-                            <div class="work-title">India Energy Week 2026</div>
-
-                            <div class="work-meta" style="margin-bottom:0;">
-                                <span>GAIL &amp; Petronet ecosystem</span>
-                                <span>Goa</span>
-                            </div>
-
-                            <div class="work-desc">
-                                Fourth edition of India Energy Week - event production and on-ground content.
-                            </div>
+                        <div class="work-title">
+                            <?= htmlspecialchars($_work['title']) ?>
                         </div>
-                    </div>
-
-
-                    <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
-                        <div class="work-visual"
-                            style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2025.jpg') center/cover,linear-gradient(135deg,#18181D,#6D35A8);">
+                        <div class="work-meta" style="margin-bottom:0;">
+                            <span>
+                                <?= htmlspecialchars($_work['client']) ?>
+                            </span>
+                            <span>
+                                <?= htmlspecialchars($_work['location']) ?>
+                            </span>
                         </div>
-
-                        <div class="work-overlay">
-                            <div class="work-meta">
-                                <span>Events</span>
-                                <span>2025</span>
-                            </div>
-
-                            <div class="work-title">India Energy Week 2025</div>
-
-                            <div class="work-meta" style="margin-bottom:0;">
-                                <span>Energy / Government</span>
-                                <span>Yashobhoomi, New Delhi</span>
-                            </div>
-
-                            <div class="work-desc">
-                                Multi-day energy conference production and live coverage.
-                            </div>
+                        <div class="work-desc">
+                            <?= htmlspecialchars($_work['description']) ?>
                         </div>
                     </div>
 
+                    <?php if ($_imgCount > 1): ?>
+                        <!-- Previous -->
+                        <button type="button" class="wc-btn wc-prev" aria-label="Previous image">
+                            &#10094;
+                        </button>
+                        <!-- Next -->
+                        <button type="button" class="wc-btn wc-next" aria-label="Next image">
+                            &#10095;
+                        </button>
+                        <!-- Dots -->
+                        <div class="wc-dots">
+                            <?php for ($_d = 0; $_d < $_imgCount; $_d++): ?>
 
-                    <div class="work-card iew-slide" data-cat="Events" data-cats="Events,Content">
-                        <div class="work-visual"
-                            style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/iew-2024.jpg') center/cover,linear-gradient(135deg,#0A0A0D,#24103D);">
+                                <button type="button" class="wc-dot<?= $_d === 0 ? ' active' : '' ?>" data-idx="<?= $_d ?>"
+                                    aria-label="Image <?= $_d + 1 ?>"></button>
+
+                            <?php endfor; ?>
                         </div>
-
-                        <div class="work-overlay">
-                            <div class="work-meta">
-                                <span>Events</span>
-                                <span>2024</span>
-                            </div>
-
-                            <div class="work-title">India Energy Week 2024</div>
-
-                            <div class="work-meta" style="margin-bottom:0;">
-                                <span>Energy / Government ecosystem</span>
-                                <span>Goa</span>
-                            </div>
-
-                            <div class="work-desc">
-                                Held in Goa - high-impact conference production, stages and live coverage.
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php endif; ?>
                 </div>
-                <button type="button" id="iew-prev" class="iew-slider-btn iew-prev">
-                    &#10094;
-                </button>
-                <button type="button" id="iew-next" class="iew-slider-btn iew-next">
-                    &#10095;
-                </button>
-                <div id="iew-dots" class="iew-slider-dots"></div>
-            </div>
-            <div class="work-card" data-cat="Events" data-cats="Events,Brand Films">
-                <div class="work-visual"
-                    style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/gridcon.jpg') center/cover,linear-gradient(135deg,#24103D,#18181D);">
-                </div>
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Events</span>
-                        <span>2025</span>
-                    </div>
-                    <div class="work-title">GRIDCON 2025</div>
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>POWERGRID</span>
-                        <span>Yashobhoomi, New Delhi</span>
-                    </div>
-                    <div class="work-desc">International conference-cum-exhibition - production and content.</div>
-                </div>
-            </div>
-            <div class="work-card" data-cat="Experiences" data-cats="Experiences,Brand Films">
-                <div class="work-visual"
-                    style="background:linear-gradient(0deg,rgba(5,5,5,.35),rgba(5,5,5,.1)),url('assets/img/portfolio/red-fort.jpg') center/cover,linear-gradient(135deg,#111114,#6D35A8);">
-                </div>
-
-
-                <div class="work-overlay">
-                    <div class="work-meta">
-                        <span>Experiences</span>
-                        <span>2025</span>
-                    </div>
-
-                    <div class="work-title">Times Black x ICICI Bank</div>
-
-                    <div class="work-meta" style="margin-bottom:0;">
-                        <span>Luxury experiential</span>
-                        <span>Red Fort, Delhi</span>
-                    </div>
-
-                    <div class="work-desc">A premium experiential evening at the Red Fort.</div>
-                </div>
-
-            </div>
+            <?php endforeach; ?>
         </div>
-        <div style="margin-top:40px"><a href="work.php" class="btn btn-ghost">View all work</a></div>
-    </div>
-</section> 
 
+
+        <!-- VIEW ALL WORK -->
+        <div style="margin-top:40px"><a href="work.php" class="btn btn-ghost">View all work</a></div>
+
+    </div>
+</section>
 <!-- ================= EVENT PRODUCTION FEATURE ================= -->
 <section class="section transform-section" id="events">
     <div class="wrap">
@@ -322,24 +263,11 @@ include 'includes/header.php';
                 Brands We Have Worked With.
             </h2>
 
-
-            <!-- =====================================================
-         ROW 1
-         Moves LEFT
-    ====================================================== -->
-
             <div class="av-client-marquee av-client-marquee-row-1">
 
                 <div class="av-client-marquee-track" id="avClientRow1"></div>
 
             </div>
-
-
-            <!-- =====================================================
-         ROW 2
-         Moves RIGHT
-    ====================================================== -->
-
             <div class="av-client-marquee av-client-marquee-row-2">
 
                 <div class="av-client-marquee-track" id="avClientRow2"></div>

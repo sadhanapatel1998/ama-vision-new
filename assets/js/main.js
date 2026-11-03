@@ -496,7 +496,7 @@ document.addEventListener("click", () =>
 
   const avClientLogoPath = "assets/img/brand-logo/";
 
-  const avClientTotalLogos = 56;
+  const avClientTotalLogos = 50;
 
 
   /* =======================================================

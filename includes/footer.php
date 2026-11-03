@@ -59,137 +59,6 @@ require_once __DIR__ . '/data.php';
 </footer>
 <script src="assets/js/data.js?v=<?= filemtime(__DIR__ . "/../assets/js/data.js") ?>"></script>
 <script src="assets/js/main.js?v=<?= filemtime(__DIR__ . "/../assets/js/main.js") ?>"></script>
-<script>
-  /* =========================================
-   INDIA ENERGY WEEK SLIDER
-========================================= */
-
-  document.addEventListener("DOMContentLoaded", function () {
-
-    const iewSlider = document.getElementById("iew-slider");
-
-    if (!iewSlider) return;
-
-    const iewTrack = document.getElementById("iew-slider-track");
-    const iewSlides = iewTrack.querySelectorAll(".iew-slide");
-    const iewPrev = document.getElementById("iew-prev");
-    const iewNext = document.getElementById("iew-next");
-    const iewDots = document.getElementById("iew-dots");
-
-    let iewCurrent = 0;
-    let iewStartX = 0;
-    let iewEndX = 0;
-
-    /* Create dots */
-
-    iewSlides.forEach((slide, index) => {
-
-      const dot = document.createElement("button");
-
-      dot.type = "button";
-      dot.className = "iew-dot";
-
-      if (index === 0) {
-        dot.classList.add("active");
-      }
-
-      dot.addEventListener("click", function () {
-        iewCurrent = index;
-        iewUpdateSlider();
-      });
-
-      iewDots.appendChild(dot);
-
-    });
-
-    const iewDotItems = iewDots.querySelectorAll(".iew-dot");
-
-
-    /* Update Slider */
-
-    function iewUpdateSlider() {
-
-      iewTrack.style.transform =
-        `translateX(-${iewCurrent * 100}%)`;
-
-      iewDotItems.forEach((dot, index) => {
-
-        dot.classList.toggle(
-          "active",
-          index === iewCurrent
-        );
-
-      });
-
-    }
-
-
-    /* Next */
-
-    iewNext.addEventListener("click", function () {
-
-      iewCurrent++;
-
-      if (iewCurrent >= iewSlides.length) {
-        iewCurrent = 0;
-      }
-
-      iewUpdateSlider();
-
-    });
-
-
-    /* Previous */
-
-    iewPrev.addEventListener("click", function () {
-
-      iewCurrent--;
-
-      if (iewCurrent < 0) {
-        iewCurrent = iewSlides.length - 1;
-      }
-
-      iewUpdateSlider();
-
-    });
-
-
-    /* Touch Swipe */
-
-    iewSlider.addEventListener("touchstart", function (event) {
-
-      iewStartX = event.touches[0].clientX;
-
-    }, {
-      passive: true
-    });
-
-
-    iewSlider.addEventListener("touchend", function (event) {
-
-      iewEndX = event.changedTouches[0].clientX;
-
-      const iewDifference = iewStartX - iewEndX;
-
-      if (Math.abs(iewDifference) < 50) return;
-
-      if (iewDifference > 0) {
-        iewNext.click();
-      } else {
-        iewPrev.click();
-      }
-
-    }, {
-      passive: true
-    });
-
-
-    /* Initial */
-
-    iewUpdateSlider();
-
-  });
-</script>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -197,10 +66,10 @@ require_once __DIR__ . '/data.php';
     const video = document.getElementById("reelVideo");
     const button = document.getElementById("reelPlayButton");
     if (!player || !video || !button) return;
+
     /* =========================
        UPDATE BUTTON
     ========================= */
-
     function updateButton() {
       if (video.paused) {
         // PLAY
@@ -232,7 +101,6 @@ require_once __DIR__ . '/data.php';
     /* =========================
        BUTTON CLICK
     ========================= */
-
     button.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -247,7 +115,6 @@ require_once __DIR__ . '/data.php';
     /* =========================
        VIDEO EVENTS
     ========================= */
-
     video.addEventListener("play", function () {
       player.classList.add("is-playing");
       updateButton();
@@ -261,10 +128,126 @@ require_once __DIR__ . '/data.php';
       // Back to PLAY icon
       updateButton();
     });
-    /* Initial state */
+    /* =========================
+       INITIAL STATE
+    ========================= */
     updateButton();
-
   });
+</script>
+<!-- ══════════════════════════════════════════
+     PER-CARD INDEPENDENT SLIDER — JAVASCRIPT
+     Each card manages its own current index.
+     Clicking Next on Card A only affects Card A.
+     ══════════════════════════════════════════ -->
+<script>
+  (function () {
+    'use strict';
+
+    /* ── Initialise every card that has a data-gallery attribute ── */
+    document.querySelectorAll('.work-card[data-gallery]').forEach(function (card, cardIdx) {
+
+      /* Parse gallery JSON */
+      var gallery;
+      try {
+        gallery = JSON.parse(card.getAttribute('data-gallery'));
+      } catch (e) { return; }
+
+      if (!Array.isArray(gallery) || gallery.length === 0) return;
+
+      /* Single-image cards: nothing to do (controls not rendered by PHP) */
+      if (gallery.length === 1) return;
+
+      /* ── State ── */
+      var cur = 0;
+      var total = gallery.length;
+      var visual = card.querySelector('.work-visual');
+      var grad = card.getAttribute('data-grad') || '';
+      var dots = Array.from(card.querySelectorAll('.wc-dot'));
+      var prevBtn = card.querySelector('.wc-prev');
+      var nextBtn = card.querySelector('.wc-next');
+
+      /* ── Core: go to slide n ── */
+      function goTo(n) {
+        cur = ((n % total) + total) % total;
+        /* Update background */
+        visual.style.background =
+          "linear-gradient(0deg,rgba(5,5,5,.38),rgba(5,5,5,.08)),url('"
+          + gallery[cur]
+          + "') center/cover,"
+          + grad;
+        /* Sync dots */
+        dots.forEach(function (d, i) {
+          d.classList.toggle('active', i === cur);
+        });
+      }
+
+      /* ── Controls ── */
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          goTo(cur - 1);
+          resetTimer();
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          goTo(cur + 1);
+          resetTimer();
+        });
+      }
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function (e) {
+          e.stopPropagation();
+          goTo(parseInt(dot.getAttribute('data-idx'), 10));
+          resetTimer();
+        });
+      });
+
+      /* ── Auto-advance every 4 s (pauses on hover) ── */
+      var timer = setInterval(function () { goTo(cur + 1); }, 4000);
+      function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(function () { goTo(cur + 1); }, 4000);
+      }
+      card.addEventListener('mouseenter', function () { clearInterval(timer); });
+      card.addEventListener('mouseleave', function () { resetTimer(); });
+
+      /* ── Touch / swipe support ── */
+      var touchX = 0;
+      card.addEventListener('touchstart', function (e) {
+        touchX = e.touches[0].clientX;
+      }, { passive: true });
+      card.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 40) {
+          goTo(dx < 0 ? cur + 1 : cur - 1);
+          resetTimer();
+        }
+      });
+    });
+
+    /* ── Category filter (show/hide cards in the grid) ── */
+    var filtersEl = document.getElementById('wpFilters');
+    if (filtersEl) {
+      filtersEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        filtersEl.querySelectorAll('.filter-btn').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        var cat = btn.getAttribute('data-cat');
+        document.querySelectorAll('#workGrid .work-card').forEach(function (card) {
+          var cats = (card.getAttribute('data-cats') || card.getAttribute('data-cat') || '')
+            .split(',').map(function (s) { return s.trim().toLowerCase(); });
+          var show = cat === 'All' || cats.indexOf(cat.toLowerCase()) > -1;
+          card.classList.toggle('hide', !show);
+        });
+      });
+    }
+
+  })();
 </script>
 </body>
 
