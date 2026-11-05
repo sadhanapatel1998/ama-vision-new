@@ -1639,5 +1639,10 @@ table {
 
 #services{
       background: var(--near-black);
-} 
-  
+}
+
+.reel-player.is-playing .play-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}

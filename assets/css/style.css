@@ -51,7 +51,7 @@ body {
   color: var(--white);
 }
 
-a {
+a {       
   color: inherit;
   text-decoration: none;
 }
@@ -2250,175 +2250,88 @@ x
 }
 
 .reel-player {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  /* background: #050505; */
-  border-radius: 4px;
-  cursor: pointer;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: default;
 }
 
 .reel-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  /* background: #050505; */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .reel-overlay {
-  position: absolute;
-  inset: 0;
-  /* background: rgba(0, 0, 0, 0.35); */
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 0.3s ease;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease;
 }
-
-/* =========================
-   VIDEO CONTROL BUTTON
-========================= */
-
-/* =========================
-   VIDEO CONTROL BUTTON
-========================= */
-
-.reel-play-button {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-
-  width: 68px !important;
-  height: 68px !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  transform: translate(-50%, -50%) !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  border: 1px solid rgba(255, 255, 255, 0.55) !important;
-  border-radius: 50% !important;
-
-  background: rgba(10, 10, 10, 0.35) !important;
-
-  backdrop-filter: blur(5px);
-
-  cursor: pointer;
-  z-index: 10;
-
-  appearance: none;
-  -webkit-appearance: none;
-
-  /* Default visible */
-  opacity: 1;
-
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    opacity 0.3s ease;
-}
-
-.reel-play-button:hover {
-  transform: translate(-50%, -50%) scale(1.08) !important;
-  background: rgba(255, 255, 255, 0.12) !important;
-}
-
-
-/* =========================
-   WHEN VIDEO IS PLAYING
-   HIDE BUTTON
-========================= */
-
-.reel-player.is-playing .reel-play-button {
-  opacity: 0;
-  pointer-events: none;
-}
-
-
-/* =========================
-   SHOW BUTTON ON HOVER
-   WHEN VIDEO IS PLAYING
-========================= */
-
-.reel-player.is-playing:hover .reel-play-button {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-/* =========================
-   PLAY ICON
-========================= */
-
-.reel-play-icon {
-  display: block;
-
-  width: 0;
-  height: 0;
-
-  margin-left: 5px;
-
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  border-left: 14px solid #fff;
-}
-
-
-/* =========================
-   PAUSE ICON
-========================= */
-
-.reel-play-button.is-pause .reel-play-icon {
-  width: 14px;
-  height: 18px;
-
-  margin-left: 0;
-
-  border: none;
-
-  position: relative;
-}
-
-.reel-play-button.is-pause .reel-play-icon::before,
-.reel-play-button.is-pause .reel-play-icon::after {
-  content: "";
-
-  position: absolute;
-  top: 0;
-
-  width: 4px;
-  height: 18px;
-
-  background: #fff;
-  border-radius: 1px;
-}
-
-.reel-play-button.is-pause .reel-play-icon::before {
-  left: 0;
-}
-
-.reel-play-button.is-pause .reel-play-icon::after {
-  right: 0;
-}
-
-
-/* =========================
-   VIDEO OVERLAY
-========================= */
 
 .reel-player.is-playing .reel-overlay {
-  opacity: 0.08;
+    opacity: .08;
 }
-/* Overlay becomes lighter while playing */
+.reel-player {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: default;
+}
+
+.reel-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.reel-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
 .reel-player.is-playing .reel-overlay {
-  opacity: 0.08;
+    opacity: .08;
+}
+
+/* Sound test button */
+.sound-test {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#testSound {
+    padding: 12px 25px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#testSound:hover {
+    background: #333;
+}
+
+#soundStatus {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #777;
 }
 
 .py-0 {

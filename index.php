@@ -59,6 +59,7 @@ include 'includes/header.php';
 </section>
 
 <!-- ================= Showreel ================= -->
+
 <section class="section reel-section py-0">
     <div class="wrap">
         <div class="eyebrow reveal">Showreel</div>
@@ -67,14 +68,27 @@ include 'includes/header.php';
             <span class="muted">in motion.</span>
         </h2>
         <div class="reel-player reveal" id="reelPlayer">
-            <video id="reelVideo" class="reel-video" preload="auto" playsinline webkit-playsinline>
+            <video
+                id="reelVideo"
+                class="reel-video"
+                preload="auto"
+                playsinline
+                webkit-playsinline
+                loop
+                muted
+            >
                 <source src="assets/img/ama-vision-video.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
             </video>
             <div class="reel-overlay"></div>
-            <button type="button" class="reel-play-button" id="reelPlayButton" aria-label="Play video">
-                <span class="reel-play-icon"></span>
-            </button>
         </div>
+        <!-- Sound Test Button -->
+        <!-- <div class="sound-test">
+            <button id="testSound" type="button">
+                Test Video Sound
+            </button>
+            <p id="soundStatus">Click the button to test video sound.</p>
+        </div> -->
     </div>
 </section>
 
@@ -253,27 +267,19 @@ include 'includes/header.php';
 <section id="client" class="av-client-marquee-section">
     <div class="wrap">
         <div class="av-client-marquee-wrap">
-
             <!-- Heading -->
             <div class="eyebrow reveal av-client-eyebrow">
                 Client & Brand Portfolio
             </div>
-
             <h2 class="reveal reveal-delay-1 av-client-title text-start">
                 Brands We Have Worked With.
             </h2>
-
             <div class="av-client-marquee av-client-marquee-row-1">
-
                 <div class="av-client-marquee-track" id="avClientRow1"></div>
-
             </div>
             <div class="av-client-marquee av-client-marquee-row-2">
-
                 <div class="av-client-marquee-track" id="avClientRow2"></div>
-
             </div>
-
         </div>
     </div>
 </section>
@@ -349,17 +355,27 @@ include 'includes/header.php';
 </section>
 
 <!-- ================= SHOWREEL ================= -->
-<!-- <section class="section reel-section">
+<section class="section reel-section">
     <div class="wrap">
         <div class="eyebrow reveal">Showreel</div>
         <h2 class="reveal reveal-delay-1"
             style="font-size:clamp(30px,4.6vw,54px); text-transform:uppercase; margin-top:18px;">SEE THE VISION<br><span
                 style="color:var(--gray);">IN MOTION.</span></h2>
-        <div class="reel-player reveal reveal-delay-2" id="reelPlayer"
-            style="background-image: url(assets/img/banner/banner-2.jpg);">
+        <div class="reel-player reveal reveal-delay-2" id="reelPlayer">
+            <video id="reelVideo" src="assets/img/ama-vision-video.mp4" loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
             <div class="play-btn"></div>
+
+            <!-- Patla sa Tap for sound button -->
+            <button type="button" class="reel-tap-sound-btn" id="reelTapSoundBtn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+                <span>Tap for sound</span>
+            </button>
         </div>
     </div>
-</section> -->
+</section>
 
 <?php include 'includes/footer.php'; ?>

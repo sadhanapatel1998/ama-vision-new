@@ -61,78 +61,96 @@ require_once __DIR__ . '/data.php';
 <script src="assets/js/main.js?v=<?= filemtime(__DIR__ . "/../assets/js/main.js") ?>"></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function () {
+
     const player = document.getElementById("reelPlayer");
     const video = document.getElementById("reelVideo");
-    const button = document.getElementById("reelPlayButton");
-    if (!player || !video || !button) return;
+    const testButton = document.getElementById("testSound");
+    const status = document.getElementById("soundStatus");
 
-    /* =========================
-       UPDATE BUTTON
-    ========================= */
-    function updateButton() {
-      if (video.paused) {
-        // PLAY
-        button.classList.remove("is-pause");
-        button.setAttribute("aria-label", "Play video");
-      } else {
-        // PAUSE
-        button.classList.add("is-pause");
-        button.setAttribute("aria-label", "Pause video");
-      }
+    if (!player || !video) return;
+
+    let isVisible = false;
+
+    // Auto audio activator — tries to unmute without any tap
+    function activateAudio() {
+        if (!isVisible) return;
+        if (video.muted) {
+            video.muted = false;
+            video.volume = 1;
+        }
+        if (video.paused) {
+            video.play().catch(function () {
+                // If browser blocks unmuted play, fallback to muted so video doesn't stop
+                video.muted = true;
+                video.play().catch(function () {});
+            });
+        }
     }
-    /* =========================
-       PLAY / PAUSE
-    ========================= */
-    function toggleVideo() {
-      if (video.paused) {
-        video.play()
-          .then(function () {
-            updateButton();
-          })
-          .catch(function (error) {
-            console.error("Video play failed:", error);
-          });
-      } else {
-        video.pause();
-        updateButton();
-      }
+
+    // Har scroll, swipe, touch, wheel ya mouse motion par bina tap audio chalu karo
+    ["scroll", "wheel", "touchmove", "touchstart", "touchend", "pointermove", "pointerdown", "mousemove"].forEach(function (evt) {
+        window.addEventListener(evt, activateAudio, { passive: true });
+    });
+
+    if (testButton) {
+        testButton.addEventListener("click", activateAudio);
     }
-    /* =========================
-       BUTTON CLICK
-    ========================= */
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleVideo();
+    player.addEventListener("click", activateAudio);
+
+    // Scroll Observer: Screen me aane par Play + Sound, Screen se bahar jane par Pause + Mute
+    const observer = new IntersectionObserver(function (entries) {
+
+        entries.forEach(function (entry) {
+
+            isVisible = entry.isIntersecting;
+
+            if (isVisible) {
+
+                // Screen pe aate hi seedha audio ke saath play karo
+                video.muted = false;
+                video.volume = 1;
+
+                video.play().catch(function () {
+                    // Agar browser ne bina gesture audio block kiya toh muted chalu rakho
+                    video.muted = true;
+                    video.play().catch(function () {});
+                });
+
+            } else {
+
+                // Screen se bahar jate hi video aur audio dono pause aur stop
+                video.pause();
+                video.muted = true;
+
+            }
+
+        });
+
+    }, {
+        threshold: 0.25
     });
-    /* =========================
-       VIDEO CLICK
-    ========================= */
-    video.addEventListener("click", function () {
-      toggleVideo();
-    });
-    /* =========================
-       VIDEO EVENTS
-    ========================= */
+
+    observer.observe(player);
+
+    // Events
     video.addEventListener("play", function () {
-      player.classList.add("is-playing");
-      updateButton();
+        player.classList.add("is-playing");
     });
+
     video.addEventListener("pause", function () {
-      player.classList.remove("is-playing");
-      updateButton();
+        player.classList.remove("is-playing");
     });
-    video.addEventListener("ended", function () {
-      player.classList.remove("is-playing");
-      // Back to PLAY icon
-      updateButton();
+
+    // Error handling
+    video.addEventListener("error", function () {
+        if (status) status.textContent = "Video file could not be loaded.";
+        console.error(video.error);
     });
-    /* =========================
-       INITIAL STATE
-    ========================= */
-    updateButton();
-  });
+
+});
+
 </script>
 <!-- ══════════════════════════════════════════
      PER-CARD INDEPENDENT SLIDER — JAVASCRIPT

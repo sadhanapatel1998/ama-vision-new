@@ -103,7 +103,7 @@ $_grads = [
 </section>
 
 <!-- ================= SHOWREEL ================= -->
-<section class="section reel-section">
+<section class="section reel-section py-0">
     <div class="wrap">
         <div class="eyebrow reveal">Showreel</div>
         <h2 class="h2 reveal">
@@ -111,13 +111,26 @@ $_grads = [
             <span class="muted">in motion.</span>
         </h2>
         <div class="reel-player reveal" id="reelPlayer">
-            <video id="reelVideo" class="reel-video" preload="auto" playsinline webkit-playsinline>
+            <video
+                id="reelVideo"
+                class="reel-video"
+                preload="auto"
+                playsinline
+                webkit-playsinline
+                loop
+                muted
+            >
                 <source src="assets/img/ama-vision-video.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
             </video>
             <div class="reel-overlay"></div>
-            <button type="button" class="reel-play-button" id="reelPlayButton" aria-label="Play video">
-                <span class="reel-play-icon"></span>
+        </div>
+        <!-- Sound Test Button -->
+        <div class="sound-test">
+            <button id="testSound" type="button">
+                Test Video Sound
             </button>
+            <p id="soundStatus">Click the button to test video sound.</p>
         </div>
     </div>
 </section>
