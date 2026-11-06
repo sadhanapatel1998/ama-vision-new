@@ -93,8 +93,8 @@ $EVENTS = [
 ];
 $INDUSTRIES = [
     ['Government & Public Sector', 'Summits, official events, institutional communications, documentaries and high-protocol productions.', 'assets/img/industries/government.jpg'],
-    ['Energy & Infrastructure', 'Energy conferences, exhibitions, stakeholder events, corporate films and sector storytelling.', 'assets/img/industries/energy.jpg'],
-    ['Corporate & Enterprise', 'Conferences, leadership meets, internal events, brand films, launches and employee experiences.', 'assets/img/industries/corporate.jpg'],
+    ['Energy & Infrastructure', 'Energy conferences, exhibitions, stakeholder events, corporate films and sector storytelling.', 'assets/img/portfolio/iew-2025-old.jpg'],
+    ['Corporate & Enterprise', 'Conferences, leadership meets, internal events, brand films, launches and employee experiences.', 'assets/img/portfolio/exl.jpg'],
     ['Real Estate', 'Property storytelling, project films, launch events, digital content and experiential marketing.', 'assets/img/industries/real-estate.jpg'],
     ['Education', 'School and institutional films, event coverage, campus stories, admissions content and social assets.', 'assets/img/industries/education.jpg'],
     ['FMCG & Consumer Brands', 'Campaign content, product stories, social-first videos, activations and retail content.', 'assets/img/industries/fmcg.jpg'],
@@ -102,7 +102,7 @@ $INDUSTRIES = [
     ['Fashion & Lifestyle', 'Campaign shoots, lookbook-style films, social content, events and brand storytelling.', 'assets/img/industries/fashion.jpg'],
     ['Retail & Experiential', 'Mall activations, store experiences, launches, footfall campaigns and content.', 'assets/img/industries/retail.jpg'],
     ['Hospitality', 'Hotel, café, restaurant and lifestyle content, events, brand experiences and promotional films.', 'assets/img/industries/hospitality.jpg'],
-    ['Entertainment', 'Event coverage, promotional content, social-first edits, artist/event content and visual campaigns.', 'assets/img/industries/entertainment.jpg'],
+    ['Entertainment', 'Event coverage, promotional content, social-first edits, artist/event content and visual campaigns.', 'assets/img/portfolio/mela-mela-anime-japan-2.jpg'],
     ['Global Summits & International Events', 'BRICS, G20 and high-protocol international summits, official events, delegate experiences and large-scale event productions.', 'assets/img/portfolio/g20.jpg'],
 ];
 $WHY = [

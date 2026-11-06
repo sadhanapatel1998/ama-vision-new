@@ -33,18 +33,16 @@ require_once __DIR__ . '/includes/data.php';
 
       <!-- 3. Content Production -->
       <a href="content-production.php" class="svc-card reveal"
-        style="background-image:url('assets/img/portfolio/mela-mela-anime-japan.jpg')">
+        style="background-image:url('assets/img/services/content-production.jpg');">
         <h3>Content Production</h3>
-        <p>Films, photography and social-first packages — one shoot planned to feed every platform.</p>
-        <span class="more">Explore service →</span>
+        <span class="more">View →</span>
       </a>
 
       <!-- 4. Post-Production -->
       <a href="post-production.php" class="svc-card reveal"
-        style="background-image:url('assets/img/portfolio/g20.jpg')">
-        <h3>Post-Production</h3>
-        <p>From first frame to final master — edit, grade, sound and versioning, including same-day event edits.</p>
-        <span class="more">Explore service →</span>
+        style="background-image:url('assets/img//services/post-production.jpg');">
+        <h3>Post Production</h3>
+        <span class="more">View →</span>
       </a>
 
       <!-- 5. Experiences & Activations -->
