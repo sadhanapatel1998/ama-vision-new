@@ -8,5 +8,6 @@ $heroTitle='Built for Different Worlds'; $crumb='Industries'; $heroSub='15+ indu
     <div class="ind-card reveal"><div style="overflow:hidden"><div class="ph" style="background-image:url('<?= isset($IMG[$i[2]]) ? img($IMG[$i[2]],700) : img($i[2],700) ?>')"></div></div><div class="tx"><h3><?= $i[0] ?></h3><p><?= $i[1] ?></p></div></div>
   <?php endforeach; ?>
   </div>
-</div></section>
+</div>
+</section>
 <?php include 'includes/footer.php'; ?>
