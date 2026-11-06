@@ -801,10 +801,16 @@ nav.main-nav .dd a:hover {
 }
 
 .ww-tile:last-child {
-  grid-column: span 3;
+  grid-column: span 2;
 }
 
 @media (max-width:1000px) {
+  .ww-tile:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width:600px) {
   .ww-tile:last-child {
     grid-column: auto;
   }
